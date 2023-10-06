@@ -2,7 +2,7 @@ package com.workhumandemo.springboot.controller;
 
 
 import com.workhumandemo.springboot.common.Result;
-import com.workhumandemo.springboot.entity.ListCountry;
+import com.workhumandemo.springboot.entity.country;
 import com.workhumandemo.springboot.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +21,7 @@ public class CountryController {
     @GetMapping
     public Result getList(String keyword)
     {
-        List<String> countries = countryService.getList(keyword);
+        List<country> countries = countryService.getList(keyword);
 
         return Result.success(countries);
     }

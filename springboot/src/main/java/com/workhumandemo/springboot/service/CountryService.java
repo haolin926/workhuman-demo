@@ -1,8 +1,10 @@
 package com.workhumandemo.springboot.service;
 
+import com.workhumandemo.springboot.entity.country;
+
 import java.util.List;
 
 public interface CountryService {
 
-    List<String> getList(String keyword);
+    List<country> getList(String keyword);
 }

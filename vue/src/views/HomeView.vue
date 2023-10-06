@@ -1,18 +1,23 @@
 <template>
   <div class="home">
+
     <div id="title">
       <h2>Search Country</h2>
     </div>
+
+    <!--input text and search button-->
     <div id="searchBar">
       <el-input v-model="input" placeholder="Enter keyword to search for country" clearable/>
       <el-button type="primary" id="submit" @click="search">Search</el-button>
     </div>
 
+    <!--Table to display data-->
     <div id="table">
       <el-table :data="tableData" stripe style="width: 100%">
-        <el-table-column prop="country" label="Country"/>
+        <el-table-column prop="name" label="Country"/>
       </el-table>
     </div>
+
   </div>
 
 </template>
@@ -46,7 +51,8 @@
 </style>
 
 <script>
-
+//import axios
+import request from "@/utils/request";
 
 export default {
   name: 'HomeView',
@@ -54,14 +60,27 @@ export default {
   data(){
     return{
       input:'',
-      tableData:[
-      ]
+      tableData:[]
     }
   },
   methods:{
     search(){
-
+        //request backend url localhost:9090/country
+        //store input into variable keyword, pass it to back end
+        request.get("/country",{
+          params:{
+            keyword:this.input
+          }
+        }).then(res =>{
+          this.tableData = res.data
+        })
     }
+  },
+  //mounted function is called when page is loaded
+  //pass down empty string which returns all countries
+  mounted()
+  {
+    this.search()
   }
 }
 </script>

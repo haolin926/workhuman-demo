@@ -1,5 +1,6 @@
 package com.workhumandemo.springboot.service.impl;
 
+import com.workhumandemo.springboot.entity.country;
 import com.workhumandemo.springboot.mapper.CountryMapper;
 import com.workhumandemo.springboot.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +15,7 @@ public class CountryServiceImpl implements CountryService {
     private CountryMapper countryMapper;
 
     @Override
-    public List<String> getList(String keyword) {
-
-        //don't execute sql query if a empty string is passed
-        if(keyword.isEmpty())
-        {
-            return null;
-        }
-
-        else
-        {
-            return countryMapper.getList(keyword);
-        }
+    public List<country> getList(String keyword) {
+        return countryMapper.getList(keyword);
     }
 }
