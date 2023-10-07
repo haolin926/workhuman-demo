@@ -13,7 +13,7 @@
 
     <!--Table to display data-->
     <div id="table">
-      <el-table :data="tableData" stripe style="width: 100%">
+      <el-table :data="tableData" stripe empty-text="No Country Found" style="width: 100%">
         <el-table-column prop="name" label="Country"/>
       </el-table>
     </div>
@@ -51,8 +51,7 @@
 </style>
 
 <script>
-//import axios
-import request from "@/utils/request";
+import axios from "axios";
 
 export default {
   name: 'HomeView',
@@ -65,15 +64,19 @@ export default {
   },
   methods:{
     search(){
-        //request backend url localhost:9090/country
-        //store input into variable keyword, pass it to back end
-        request.get("/country",{
-          params:{
-            keyword:this.input
-          }
-        }).then(res =>{
-          this.tableData = res.data
-        })
+
+      //use axios to generate http request
+      axios({
+        method:"get",
+        url:"http://localhost:9090/country",
+        params:{keyword:this.input}
+      }).then(result=>{
+        console.log(result)
+        console.log(result.data)
+        //we only want the data part of this json data
+        this.tableData = result.data.data
+      })
+
     }
   },
   //mounted function is called when page is loaded

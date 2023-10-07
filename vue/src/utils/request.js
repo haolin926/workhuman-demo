@@ -3,7 +3,7 @@ import axios from "axios";
 const request = axios.create(
     {
         //backend url
-        baseURL: '/api',
+        baseURL: 'http://localhost:9090',
         timeout: 5000
     }
 )
